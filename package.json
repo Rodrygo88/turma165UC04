@@ -1,0 +1,19 @@
+{
+  "name": "uc04",
+  "version": "1.0.0",
+  "description": "Aulas de desenvolvimento back-end parte 01",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rodrygo88/turma165UC04.git"
+  },
+  "author": "Rodrigo Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rodrygo88/turma165UC04/issues"
+  },
+  "homepage": "https://github.com/Rodrygo88/turma165UC04#readme"
+}
