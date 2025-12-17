@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Aulas de desenvolvimento back-end parte 01",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Rodrygo88/turma165UC04/issues"
   },
-  "homepage": "https://github.com/Rodrygo88/turma165UC04#readme"
+  "homepage": "https://github.com/Rodrygo88/turma165UC04#readme",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
 }
