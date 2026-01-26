@@ -145,4 +145,23 @@ export class ContatoController{
         }
     }
 
+        static buscarPorIngrediente(req, res){
+        try {
+            const {nome} = req.params;
+            if(!nome){
+                res.status(400).json({msg: "O nome não pode ser vazio."});
+                return;
+            }
+            const contato = ContatoModel.buscarPorNome(nome);
+            if(!contato){
+                res.status(404).json({msg: "Nenhum contato com este nome."})
+                return;
+            }
+            res.status(200).json({msg: "Contato encontrado: ", contato});
+           
+        } catch (error) {
+            res.status(500).json({msg:"Erro interno ao buscar o contato ", erro:error.message});
+        }
+    }
+
 }

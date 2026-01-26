@@ -9,6 +9,9 @@ router.get("/", ReceitaController.listarReceitas);
 //Rota para buscar um receita por ID:
 router.get("/:id", ReceitaController.buscarPorId);
 
+//Rota para buscar um receita por ingrediente:
+router.get("/ingrediente/:ingrediente", ReceitaController.buscarPorIngrediente);
+
 //Rota para criar um novo receita:
 router.post("/", ReceitaController.criarReceita);
 

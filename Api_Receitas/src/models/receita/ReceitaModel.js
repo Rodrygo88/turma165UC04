@@ -9,6 +9,10 @@ export class ReceitaModel {
     return receitas.find((u) => u.id === parseInt(id));
   }
 
+  static buscarPorNome(nome) {
+    return receitas.find((u) => u.nome === nome);
+  }
+
   static criarReceita(nome, ingredientes, modoPreparo, tempoPreparo) {
     const novoReceita = {
       id: receitas.length + 1,
@@ -39,5 +43,9 @@ export class ReceitaModel {
     }
     receitas.splice(index, 1);
     return true;
+  }
+
+  static buscarPorIngrediente(ingrediente) {
+    return ingrediente;
   }
 }

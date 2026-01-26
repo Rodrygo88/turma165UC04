@@ -42,6 +42,18 @@ export class ReceitaController{
                 return;
             }
 
+            const receitaNome = ReceitaModel.buscarPorNome(nome);
+            if(receitaNome){
+                res.status(404).json({msg:"Já existe a receita com esse nome."})
+                return
+            }
+
+            if(tempoPreparo <= 0){
+                res.status(404).send({msg:"O tempo de preparo da receita deve ser positivo."});
+                return;
+            }
+
+
             const novoReceita = ReceitaModel.criarReceita(nome, ingredientes, modoPreparo, tempoPreparo);
             res.status(200).json({msg: "Receita criada com sucesso!", novoReceita});
             
@@ -96,4 +108,22 @@ export class ReceitaController{
         }
     }
 
+    static buscarPorIngrediente(req, res){
+        try {
+            const {ingrediente} = req.params;
+            if(!ingrediente){
+                res.status(400).json({msg: "O Id não pode ser vazio."});
+                return;
+            }
+            const receita = ReceitaModel.buscarPorIngrediente(ingrediente);
+            if(!receita){
+                res.status(404).json({msg: "Nenhum receita com este Id."})
+                return;
+            }
+            res.status(200).json({msg: "Receita encontrado: ", receita});
+           
+        } catch (error) {
+            res.status(500).json({msg:"Erro interno ao buscar o receita ", erro:error.message});
+        }
+    }
 }
