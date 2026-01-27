@@ -1,6 +1,11 @@
 import { receitas } from "../../data/banco.js";
 
 export class ReceitaModel {
+
+  static buscarPorIngrediente(ingrediente){
+    return ingrediente;
+  }
+
   static listarTodos() {
     return receitas;
   }
@@ -43,9 +48,5 @@ export class ReceitaModel {
     }
     receitas.splice(index, 1);
     return true;
-  }
-
-  static buscarPorIngrediente(ingrediente) {
-    return ingrediente;
   }
 }

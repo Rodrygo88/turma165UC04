@@ -2,11 +2,26 @@ import { ReceitaModel } from "../../models/receita/ReceitaModel.js";
 
 export class ReceitaController{
 
+    static buscarPorIngrediente(req, res){
+        try {
+            const {ingrediente} = req.params;
+            const receitas = ReceitaModel.buscarPorIngrediente(ingrediente);
+            
+            if(!receitas){
+                res.status(200).json({msg: "Nenhuma receita no banco."});
+                return
+            }
+            res.status(200).json({msg:"Receitas Encontrados: ", ingrediente});
+        } catch (error) {
+            res.status(500).json({msg:"Erro interno ao listar os receitas ", erro:error.message});
+        }
+    }
+
     static listarReceitas(req, res){
         try {
             const receitas = ReceitaModel.listarTodos();
             if(receitas.length === 0 || !receitas){
-                res.status(200).json({msg: "Nenhum contato no banco."});
+                res.status(200).json({msg: "Nenhum receita no banco."});
                 return
             }
             res.status(200).json({msg:"Receitas Encontrados: ", receitas});
@@ -108,22 +123,4 @@ export class ReceitaController{
         }
     }
 
-    static buscarPorIngrediente(req, res){
-        try {
-            const {ingrediente} = req.params;
-            if(!ingrediente){
-                res.status(400).json({msg: "O Id não pode ser vazio."});
-                return;
-            }
-            const receita = ReceitaModel.buscarPorIngrediente(ingrediente);
-            if(!receita){
-                res.status(404).json({msg: "Nenhum receita com este Id."})
-                return;
-            }
-            res.status(200).json({msg: "Receita encontrado: ", receita});
-           
-        } catch (error) {
-            res.status(500).json({msg:"Erro interno ao buscar o receita ", erro:error.message});
-        }
-    }
 }
