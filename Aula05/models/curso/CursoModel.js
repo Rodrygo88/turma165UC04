@@ -14,7 +14,7 @@ export class CursoModel{
     static criarCurso(nome){
         const novoCurso = {
             id: cursos.length + 1,
-            nome: nome
+            nome: nome                   
         };
         cursos.push(novoCurso);
         return novoCurso;
@@ -26,7 +26,7 @@ export class CursoModel{
             return false;
         };
         cursos[index] = {
-            id: id,
+            id: parseInt(id),
             nome: nome
         };
         return cursos[index];
@@ -43,6 +43,7 @@ export class CursoModel{
     }
 
     static listarAlunosPorCurso(idCurso){
-        return alunos.filter(a => a.cursoId === parent(idCurso));
+        return alunos.filter(a => a.cursoId === parseInt(idCurso));
     }
+    
 }
