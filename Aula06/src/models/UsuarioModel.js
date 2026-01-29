@@ -24,11 +24,11 @@ export class UsuarioModel {
   }
 
   static deletarUsuario(id) {
-    const index = usuarios.findIndex((u) => u.id === parseInt(id));
+    const index = usuarios.findIndex(u => u.id === parseInt(id));
     if (index === -1) {
       return false;
     }
-    usuarios.slice(index, 1);
+    usuarios.splice(index, 1);
     return true;
   }
 }
