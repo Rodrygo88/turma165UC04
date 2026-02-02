@@ -12,6 +12,17 @@ export class UsuarioModel{
 
     static criar(usuario){
         usuarios.push(usuario);
-        return usuario
+        return usuario;
     }
+
+    static atualizarUsuario(id, novosDados){
+        const index = usuarios.findIndex(u => u.index === id);
+        if (index === -1){
+            return false;
+        }
+        usuarios[index] = {...usuarios[index], ...novosDados};
+        return usuarios[index];
+    }
+
+    
 };
