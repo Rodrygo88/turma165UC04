@@ -24,5 +24,13 @@ export class UsuarioModel{
         return usuarios[index];
     }
 
-    
+    static deletarUsuario(id){
+        const index = usuarios.findIndex(u => u.index === id);
+        if (index === -1){
+            return false;
+        }
+
+        usuarios.splice(index, 1);
+        return true;
+    }
 };
