@@ -1,1 +1,1 @@
-export const usuarios = {};
+export const usuarios = []; 
