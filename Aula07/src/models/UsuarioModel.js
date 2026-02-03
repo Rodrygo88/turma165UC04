@@ -16,7 +16,7 @@ export class UsuarioModel{
     }
 
     static atualizarUsuario(id, novosDados){
-        const index = usuarios.findIndex(u => u.index === id);
+        const index = usuarios.findIndex(u => u.id === id);
         if (index === -1){
             return false;
         }
@@ -25,7 +25,7 @@ export class UsuarioModel{
     }
 
     static deletarUsuario(id){
-        const index = usuarios.findIndex(u => u.index === id);
+        const index = usuarios.findIndex(u => u.id === id);
         if (index === -1){
             return false;
         }

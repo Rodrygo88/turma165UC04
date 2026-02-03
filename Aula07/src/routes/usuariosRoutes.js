@@ -13,5 +13,8 @@ router.post("/login", UsuarioController.verificarLogin);
 
 router.delete("/:id", UsuarioController.deletarUser);
 
+router.put("/:id", UsuarioController.atualizarUsuario);
+
+router.patch("/:id", UsuarioController.atualizarParcialmente);
 
 export default router;

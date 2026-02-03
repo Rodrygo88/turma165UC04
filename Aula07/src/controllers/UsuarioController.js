@@ -94,4 +94,60 @@ export class UsuarioController{
             res.status(500).json({msg: "Erro interno ao deletar usuário por Id", erro: error.message});
         }
     }
+
+    static async atualizarUsuario(req, res){
+        try {
+            const {id} = req.params;
+            const {nome, email, senha} = req.body;
+            if(!nome || !email || !senha){
+                res.status(400).json({msg: "Todos os campos devem ser preenchidos"});
+                return;
+            }
+
+            const SALT = process.env.SALT;
+            const senhaHash = await bcrypt.hash(senha, parseInt(SALT));
+            const novosDados = {
+                id: id,
+                nome: nome,
+                email: email,
+                senha: senhaHash
+            }
+
+            const usuarioAtualizado = UsuarioModel.atualizarUsuario(id, novosDados);
+            if(!usuarioAtualizado){
+                res.status(404).json({msg: "Nenhum usuário encontrado"});
+                return;
+            }
+            res.status(201).json({msg:"Usuário Atualizado com sucesso", usuarioAtualizado});
+
+        } catch (error) {
+            res.status(500).json({msg: "Erro interno ao atualizar usuário", erro: error.message});
+        }
+    }
+
+    static async atualizarParcialmente(req,res){
+        try {
+            const {id} = req.params;
+            const campos = {...req.body}; //Pode conter nome, email ou senha...
+
+            if(!campos){
+                res.status(400).json({msg: "Nenhum valor recebido para atualizar"});
+                return;
+            }
+
+            if(campos.senha){
+                const SALT = process.env.SALT;
+                campos.senha = await bcrypt.hash(campos.senha, parseInt(SALT));
+            }
+
+            const usuarioAtualizado = UsuarioModel.atualizarUsuario(id, campos);
+            if(!usuarioAtualizado){
+                res.status(404).json({msg: "Nenhum usuario encontrado"});
+                return;
+            }
+            res.status(201).json({msg:"Usuario atualizado com sucesso", usuarioAtualizado});
+        } catch (error) {
+             res.status(500).json({msg: "Erro interno ao atualizar parcialmente usuário", erro: error.message});
+        }
+    }
 }
