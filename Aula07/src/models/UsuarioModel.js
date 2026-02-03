@@ -11,7 +11,7 @@ export class UsuarioModel{
     }
 
     static criarUsuario(usuario){
-        usuarios.push = usuario;
+        usuarios.push(usuario);
         return usuario;
     }
 

@@ -5,8 +5,13 @@ const router = express.Router();
 
 router.get("/", UsuarioController.listarUsuarios);
 
+router.get("/:id", UsuarioController.buscarPorId);
+
 router.post("/", UsuarioController.criarUsuario);
 
 router.post("/login", UsuarioController.verificarLogin);
+
+router.delete("/:id", UsuarioController.deletarUser);
+
 
 export default router;

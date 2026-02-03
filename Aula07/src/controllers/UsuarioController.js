@@ -11,7 +11,7 @@ export class UsuarioController{
                 res.status(404).json({msg: "Nenhum usuário cadastrado!"});
                 return;
             }
-            res.status(200).json({msg: "Usuários encontradooos"}, usuarios);
+            res.status(200).json({msg: "Usuários encontradoos", usuarios});
         } catch (error) {
             res.status(500).json({msg: "Erro interno ao listar usuários", erro: error.message});
         }
@@ -63,6 +63,35 @@ export class UsuarioController{
 
         } catch (error) {
             res.status(500).json({msg: "Erro interno ao verificar login do usuários", erro: error.message});
+        }
+    }
+
+    static buscarPorId(req, res){
+        try {
+            const {id} = req.params;
+            const usuario = UsuarioModel.buscarPorId(id);
+            if(!usuario){
+                res.status(404).json({msg: "Nenhum usuário encontrado com esse ID"});
+                return;
+            }
+            res.status(200).json({msg: "Usuário encontrado", usuario});
+        } catch (error) {
+            res.status(500).json({msg: "Erro interno ao buscar usuário por Id", erro: error.message});
+            
+        }
+    }
+
+    static deletarUser(req, res){
+        try {
+            const {id} = req.params;
+            const usuario = UsuarioModel.deletarUsuario(id);
+            if(!usuario){
+                res.status(404).json({msg: "Nenhum usuário encontrado com esse ID"});
+                return;
+            }
+            res.status(200).json({msg: "Usuário deletado com sucesso!"});
+        } catch (error) {
+            res.status(500).json({msg: "Erro interno ao deletar usuário por Id", erro: error.message});
         }
     }
 }
