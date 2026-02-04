@@ -1,6 +1,8 @@
 import { UsuarioModel } from "../models/UsuarioModel.js";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
+import jwt from "jsonwebtoken";
+
 
 
 export class UsuarioController{
@@ -55,10 +57,20 @@ export class UsuarioController{
             const usuario = UsuarioModel.listarUsuarios().find(u => u.email === email);
             const verificarSenha = bcrypt.compareSync(senha, usuario.senha);
             if(!verificarSenha){
-                res.status(400).json({msg: "Senha invalida!"})
+                res.status(400).json({msg: "Email ou senha invalida!"})
                 return;
             }
-            res.status(200).json({msg: "Senha Valida!"})
+
+            //Gerar um token de JWT
+            const CHAVE = process.env.JWT_SECRET;
+            const token = jwt.sign(
+                {id: usuario.id, email: usuario.email, nome: usuario.nome}, //Informações/dados que ficaram do payload do Token
+                CHAVE, // CHAVE SECRETA para assinar o Token
+                {expiresIn: "1h"} //Tempo de expiração do token
+
+            ) 
+
+            res.status(200).json({msg: "Login efetuado!", usuario: usuario.nome, token});
            
 
         } catch (error) {
