@@ -8,12 +8,13 @@ import jwt from "jsonwebtoken";
 export class UsuarioController{
     static listarUsuarios(req, res){
         try {
+            const usuario = req.usuario;
             const usuarios = UsuarioModel.listarUsuarios();
             if(!usuarios || usuarios.length === 0){
                 res.status(404).json({msg: "Nenhum usuário cadastrado!"});
                 return;
             }
-            res.status(200).json({msg: "Usuários encontradoos", usuarios});
+            res.status(200).json({msg: "Usuários encontradoos", solicitante: usuario.nome, usuarios});
         } catch (error) {
             res.status(500).json({msg: "Erro interno ao listar usuários", erro: error.message});
         }
@@ -67,9 +68,14 @@ export class UsuarioController{
                 {id: usuario.id, email: usuario.email, nome: usuario.nome}, //Informações/dados que ficaram do payload do Token
                 CHAVE, // CHAVE SECRETA para assinar o Token
                 {expiresIn: "1h"} //Tempo de expiração do token
-
             ) 
 
+            res.cookie("token", token,{
+                httpOnly: true,
+                maxAge: 60 * 60 * 100,//1hora
+                sameSite: "lax"
+            });
+            
             res.status(200).json({msg: "Login efetuado!", usuario: usuario.nome, token});
            
 
