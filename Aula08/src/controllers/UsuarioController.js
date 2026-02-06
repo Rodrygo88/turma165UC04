@@ -14,7 +14,7 @@ export class UsuarioController{
                 res.status(404).json({msg: "Nenhum usuário cadastrado!"});
                 return;
             }
-            res.status(200).json({msg: "Usuários encontradoos", solicitante: usuario.nome, usuarios});
+            res.status(200).json({msg: "Usuários encontradoos", solicitante: usuario.nome, role: usuario.role, usuarios});
         } catch (error) {
             res.status(500).json({msg: "Erro interno ao listar usuários", erro: error.message});
         }
@@ -34,7 +34,64 @@ export class UsuarioController{
                 id: uuidv4(),
                 nome: nome,
                 email: email,
-                senha: senhaHash
+                senha: senhaHash,
+                role: "USER"
+            }
+            const usuarioCriado = UsuarioModel.criarUsuario(novoUsuario);
+            if(usuarioCriado){
+                res.status(201).json({msg: "Usuario criado com sucesso!", usuarioCriado});
+                return
+            }
+
+        } catch (error) {
+            res.status(500).json({msg: "Erro interno ao criar usuários", erro: error.message});
+        }
+    }
+
+     static async criarUsuarioPorAdmin(req,res){
+        try {
+            const {nome, email, senha, role} = req.body;
+            if(!nome || !email || !senha || !role){
+                res.status(400).json({msg: "Todos os campos devem ser preechidos."});
+                return;
+            }
+
+            const SALT = process.env.SALT;
+            const senhaHash = await bcrypt.hash(senha, parseInt(SALT));
+            const novoUsuario = {
+                id: uuidv4(),
+                nome: nome,
+                email: email,
+                senha: senhaHash,
+                role: role
+            }
+            const usuarioCriado = UsuarioModel.criarUsuario(novoUsuario);
+            if(usuarioCriado){
+                res.status(201).json({msg: "Usuario criado com sucesso!", usuarioCriado});
+                return
+            }
+
+        } catch (error) {
+            res.status(500).json({msg: "Erro interno ao criar usuários", erro: error.message});
+        }
+    }
+
+     static async criarUsuario(req,res){
+        try {
+            const {nome, email, senha, role} = req.body;
+            if(!nome || !email || !senha){
+                res.status(400).json({msg: "Todos os campos devem ser preechidos."});
+                return;
+            }
+
+            const SALT = process.env.SALT;
+            const senhaHash = await bcrypt.hash(senha, parseInt(SALT));
+            const novoUsuario = {
+                id: uuidv4(),
+                nome: nome,
+                email: email,
+                senha: senhaHash,
+                role: role
             }
             const usuarioCriado = UsuarioModel.criarUsuario(novoUsuario);
             if(usuarioCriado){
@@ -65,7 +122,7 @@ export class UsuarioController{
             //Gerar um token de JWT
             const CHAVE = process.env.JWT_SECRET;
             const token = jwt.sign(
-                {id: usuario.id, email: usuario.email, nome: usuario.nome}, //Informações/dados que ficaram do payload do Token
+                {id: usuario.id, email: usuario.email, nome: usuario.nome, role: usuario.role}, //Informações/dados que ficaram do payload do Token
                 CHAVE, // CHAVE SECRETA para assinar o Token
                 {expiresIn: "1h"} //Tempo de expiração do token
             ) 
@@ -116,11 +173,19 @@ export class UsuarioController{
     static async atualizarUsuario(req, res){
         try {
             const {id} = req.params;
+            const usuario = req.usuario;
             const {nome, email, senha} = req.body;
+            
+            if(usuario.role !== "ADMIN" && usuario.id !== id){
+                res.status(403).json({msg: "Acesso negado - Você não pode atualizar esse usuário"});
+                return;
+            }
+            
             if(!nome || !email || !senha){
                 res.status(400).json({msg: "Todos os campos devem ser preenchidos"});
                 return;
             }
+
 
             const SALT = process.env.SALT;
             const senhaHash = await bcrypt.hash(senha, parseInt(SALT));
@@ -147,6 +212,12 @@ export class UsuarioController{
         try {
             const {id} = req.params;
             const campos = {...req.body}; //Pode conter nome, email ou senha...
+            const usuario = req.usuario;
+
+            if(usuario.role !== "ADMIN" && usuario.id !== id){
+                res.status(403).json({msg: "Acesso negado - Você não pode atualizar esse usuário"});
+                return;
+            }
 
             if(!campos){
                 res.status(400).json({msg: "Nenhum valor recebido para atualizar"});

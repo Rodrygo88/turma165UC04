@@ -14,11 +14,11 @@ export function autenticarToken(req, res, next) {
 
   // Usa o que exister
   const token = tokenHeader || tokenCookie;
-  
+
   if (!token) {
     res.status(401).json({ msg: "Acesso negado - Token não fornecido" });
     return;
-  }
+  };
 
   try {
     // Verificar se o token é válido
