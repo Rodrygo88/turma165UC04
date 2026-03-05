@@ -1,6 +1,5 @@
 import express, { json } from "express";
 import "dotenv/config";
-import db from "./src/config/db.js";
 import alunoRoutes from "./src/routes/alunoRoutes.js";
 
 const app = express();
