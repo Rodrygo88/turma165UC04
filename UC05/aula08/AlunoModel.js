@@ -46,4 +46,82 @@ export class AlunoModel{
         const sql = `SELECT * FROM alunos WHERE nota BETWEEN 3 AND 6`;
         return db.query(sql);
     }
+
+    /* ATIVIDADE */
+
+    static buscarPorOrdem(){
+        const sql = `SELECT * FROM alunos ORDER BY nome`;
+        return db.query(sql);
+    }
+
+    static buscarPorRank(){
+        const sql = `SELECT * FROM alunos ORDER BY nota DESC`;
+        return db.query(sql);
+    }
+
+    static buscarPorNomeNota(){
+        const sql = `SELECT nome, nota FROM alunos`;
+        return db.query(sql);
+    }
+
+    static buscarCursos(){
+        const sql = `SELECT DISTINCT curso FROM alunos`;
+        return db.query(sql);
+    }
+
+    static buscarParteNome(nome){
+        const sql = `SELECT * FROM alunos WHERE lower(nome) LIKE lower($1)`;
+        return db.query(sql, [`${nome}%`]);
+    }
+
+    static buscarNotasMaiores(nota){
+        const sql = `SELECT * FROM alunos WHERE nota > $1`;
+        return db.query(sql, [nota]);
+    }
+
+    static buscarEntreValores(min, max){
+        const sql = `SELECT * FROM alunos WHERE nota BETWEEN $1 AND $2`;
+        return db.query(sql, [min, max]);
+    }
+
+    static buscarMedia(){
+        const sql = `SELECT ROUND(AVG(nota), 2) as Media FROM alunos`;
+        return db.query(sql);
+    }
+
+    static buscarMaiorMenor(){
+        const sql = `SELECT MAX(nota) AS Maior, MIN(nota) as Menor FROM alunos`;
+        return db.query(sql);
+    }
+
+    static buscarAlunosCurso(){
+        const sql = `SELECT curso, COUNT(*) as QTD_Alunos FROM alunos GROUP BY curso`;
+        return db.query(sql);
+    }
+
+    static buscarTopMaiores(){
+        const sql = `SELECT * FROM alunos ORDER BY nota DESC LIMIT 3`;
+        return db.query(sql);
+    }
+
+    static buscarTopMenor(){
+        const sql = `SELECT * FROM alunos ORDER BY nota ASC LIMIT 1`;
+        return db.query(sql);
+    }
+
+    static buscarComStatus(){
+        const sql = `SELECT *, CASE WHEN nota >= 7 THEN 'Aprovado' ELSE 'Reprovado' END AS status FROM alunos;`
+        return db.query(sql);
+    }
+
+    static buscarMediaPorCurso(){
+        const sql = `SELECT curso, AVG(nota) AS Media FROM alunos GROUP BY curso ORDER BY Media DESC;`
+        return db.query(sql);
+    }
+    static buscarRankCompleto(){
+        const sql = `SELECT * FROM alunos ORDER BY nota DESC;`
+        return db.query(sql);
+    }
+
+
 }
