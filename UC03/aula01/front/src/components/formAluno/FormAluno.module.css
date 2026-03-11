@@ -1,0 +1,43 @@
+.formulario{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    background-color: rgb(255, 255, 255);
+    width: 400px;
+    border-radius: .625rem;
+}
+
+.titulo{
+    color: rgb(0, 0, 0);
+}
+
+.caixa_texto{
+    padding: 5px;
+    width: 300px;
+}
+
+.caixa_nota{
+    padding: 5px;
+    width: 100px;
+}
+
+.botao_principal{
+    background-color: #009879;
+    padding: 10px;
+    border-radius: .325rem;
+    border: 1px solid black;
+    color: rgb(0, 0, 0);
+    width: 150px;
+}
+
+.botao_secundario{
+    background-color: #009879;
+    padding: 10px;
+    border-radius: .325rem;
+    border: 1px solid black;
+    color: rgb(0, 0, 0);
+    width: 100px;
+}
