@@ -10,4 +10,3 @@ router.put("/:id", FilmeController.atualizarFilme);
 router.delete("/:id", FilmeController.deletarFilme);
 
 export default router;
-.6
