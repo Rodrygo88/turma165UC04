@@ -1,4 +1,5 @@
 import AdminFilmesPage from "./pages/admin/AdminFilmesPage";
+import FilmesUsuarioPage from "./pages/user/FilmesUsuarioPage";
 
 function App() {
 
@@ -6,6 +7,7 @@ function App() {
   return (
     <>
       <AdminFilmesPage />
+      <FilmesUsuarioPage />
     </>
   )
 }

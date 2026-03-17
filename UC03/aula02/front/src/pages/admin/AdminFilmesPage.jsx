@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import FilmeTable from "../../components/FilmeTable/FilmeTable.jsx";
 import FilmeForm from "../../components/FilmeForm/FilmeForm.jsx";
+import "./AdminFilmesPage.css";
 
 import {
   listarFilmes,
@@ -59,19 +60,22 @@ export default function AdminFilmesPage() {
 
   return (
     <>
-      <h1>Administração de Filmes</h1>
-      <p>Cadastre, edite e exclua filmes do catálogo.</p>
-      <FilmeForm
-        onSalvar={salvarFilme}
-        filmeEmEdição={filmeEmEdicao}
-        onCancelar={cancelarEdicao}
-      />
-
-      <FilmeTable
-        filmes={filmes}
-        onEditar={editarFilme}
-        onExcluir={excluirFilme}
-      />
+      <main className="container">
+        <section className="cabecalho-admin">
+          <h1> Admistração de Filmes</h1>
+          <p>Cadastre, edite e exclua filme do catálogo.</p>
+        </section>
+        <FilmeForm
+          onSalvar={salvarFilme}
+          filmeEmEdicao={filmeEmEdicao}
+          onCancelar={cancelarEdicao}
+        />
+        <FilmeTable
+          filmes={filmes}
+          onEditar={editarFilme}
+          onExcluir={excluirFilme}
+        />
+      </main>
     </>
   );
 }
