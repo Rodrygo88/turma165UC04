@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function FilmeCard({ filme }) {
   return (
     <>
@@ -5,10 +7,11 @@ export default function FilmeCard({ filme }) {
         <img src={filme.imagem_url} alt={filme.titulo} />
 
         <div>
-            <h2>{filme.titulo}</h2>
-            <p>Gênero: {filme.genero}</p>
-            <p>Ano: {filme.ano}</p>
+          <h2>{filme.titulo}</h2>
+          <p>Gênero: {filme.genero}</p>
+          <p>Ano: {filme.ano}</p>
         </div>
+        <Link to={`/filmes/${filme.id}`}> Ver detalhes</Link>
       </article>
     </>
   );

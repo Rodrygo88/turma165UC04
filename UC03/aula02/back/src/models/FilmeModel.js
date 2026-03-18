@@ -9,7 +9,7 @@ export class FilmeModel{
         const sql = `select * from filmes where id = $1`;
         return db.query(sql, [id]);
     }
-    static criarFilme(titulo, genero, ano,  ){
+    static criarFilme(titulo, genero, ano, imagem_url){
         const sql = `insert into filmes (titulo, genero, ano, imagem_url) values($1, $2, $3, $4)`;
         return db.query(sql, [titulo, genero, ano, imagem_url]);
     }

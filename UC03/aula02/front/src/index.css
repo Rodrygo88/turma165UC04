@@ -1,0 +1,83 @@
+/* Reset básico */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonte e estrutura geral */
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Layout da aplicação */
+#root{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+
+header{
+  background-color: #1f2937;
+  color: white;
+  padding: 20px 0;
+}
+
+header div{
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1{
+  font-size: 24px;
+}
+
+nav ul{
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a{
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+nav a:hover{
+  color: #facc15;
+}
+
+/* CONTEÚDO */
+
+main{
+  flex: 1;
+  max-width: 1100px;
+  margin: 30px auto;
+  width: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+}
+
+/* FOOTER */
+
+footer{
+  background-color: #1f2937;
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: auto;
+}
+
+footer p{
+  margin: 5px 0;
+  font-size: 14px;
+}

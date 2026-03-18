@@ -1,15 +1,22 @@
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import AdminFilmesPage from "./pages/admin/AdminFilmesPage";
 import FilmesUsuarioPage from "./pages/user/FilmesUsuarioPage";
-
+import Footer from "./components/Layout/Footer";
+import Header from "./components/Layout/Header";
+import "./index.css";
 function App() {
-
-
   return (
     <>
-      <AdminFilmesPage />
-      <FilmesUsuarioPage />
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<FilmesUsuarioPage />} />
+          <Route path="/admin" element={<AdminFilmesPage />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
 export default App;

@@ -1,6 +1,7 @@
 import FilmeList from "../../components/FilmeList/FilmeList";
 import { useState, useEffect } from "react";
 import { listarFilmes } from "../../../services/filmeService.js";
+import "./FilmesUsuarioPage.css";
 
 export default function FilmesUsuarioPage() {
   const [filmes, setFilmes] = useState([]);
