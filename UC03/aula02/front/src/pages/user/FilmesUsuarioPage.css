@@ -21,6 +21,8 @@ article {
     transform 0.2s ease,
     box-shadow 0.2s ease;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 article:hover {
@@ -47,4 +49,54 @@ article p {
   font-size: 14px;
   color: #555;
   margin: 3px 0;
+}
+
+.botao {
+  background-color: #374151;
+  width: 300px;
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+.buscar{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+input{
+  height: 30px;
+  width: 300px;
+}
+
+
+.busca-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+
+.busca-container input {
+  width: 300px;
+  padding: 10px 14px;
+  font-size: 16px;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+
+.busca-container input::placeholder {
+  color: #888;
+}
+
+.busca-container input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
 }

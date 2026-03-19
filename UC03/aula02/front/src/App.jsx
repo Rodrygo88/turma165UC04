@@ -4,6 +4,7 @@ import FilmesUsuarioPage from "./pages/user/FilmesUsuarioPage";
 import Footer from "./components/Layout/Footer";
 import Header from "./components/Layout/Header";
 import "./index.css";
+import FilmeDetalhePage from "./pages/filmeDetalhePage/filmeDetalhePage";
 function App() {
   return (
     <>
@@ -11,6 +12,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<FilmesUsuarioPage />} />
+          <Route path="/filmes/:id" element={<FilmeDetalhePage />} />
           <Route path="/admin" element={<AdminFilmesPage />} />
         </Routes>
         <Footer />

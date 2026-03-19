@@ -23,7 +23,7 @@ export default function FilmeDetalhePage() {
       {!filme ? (
         <>
           <h2> Não foi possível axibir os dados do filme</h2>
-          <Link to="/">Voltar para Filmes.</Link>
+          <Link to="/">Voltar para Filmes</Link>
         </>
       ) : (
         <main>
@@ -37,7 +37,7 @@ export default function FilmeDetalhePage() {
                 <p>{filme.genero}</p>
                 <p>{filme.ano}</p>
               </div>
-              <Link to="/">Voltar para Filmes.</Link>
+              <Link to="/" className="botao">Voltar para Filmes</Link>
             </article>
           </section>
         </main>
