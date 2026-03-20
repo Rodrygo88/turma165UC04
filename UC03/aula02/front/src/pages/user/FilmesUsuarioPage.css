@@ -100,3 +100,54 @@ input{
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0,123,255,0.3);
 }
+
+
+
+.filtros_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.botao_filtro {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.botao_filtro:hover {
+  background-color: #e2e2e2;
+  transform: translateY(-2px);
+}
+
+.botao_filtro:active {
+  transform: scale(0.96);
+}
+
+.busca-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.busca-container input {
+  width: 300px;
+  max-width: 90%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.busca-container input:focus {
+  border-color: #666;
+}
