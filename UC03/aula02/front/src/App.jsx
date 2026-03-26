@@ -1,24 +1,31 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminFilmesPage from "./pages/admin/AdminFilmesPage";
 import FilmesUsuarioPage from "./pages/user/FilmesUsuarioPage";
-import Footer from "./components/Layout/Footer";
+import FilmeDetalhePage from "./pages/filmeDetalhePage/FilmeDetalhePage";
+import NotFoundPage from "./pages/notFoundPage/NotFoundPage";
 import Header from "./components/Layout/Header";
-import "./index.css";
-import FilmeDetalhePage from "./pages/filmeDetalhePage/filmeDetalhePage";
-function App() {
+import Footer from "./components/Layout/Footer";
+
+export default function App() {
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<FilmesUsuarioPage />} />
-          <Route path="/filmes/:id" element={<FilmeDetalhePage />} />
-          <Route path="/admin" element={<AdminFilmesPage />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </>
-  );
-}
 
-export default App;
+      <BrowserRouter>
+        <div className="app-shell">
+          <Header />
+          <main className="app-content">
+            <Routes>
+              <Route path="/" element={<FilmesUsuarioPage />} />
+              <Route path="/filmes/:id" element={<FilmeDetalhePage />} />
+              <Route path="/admin" element={<AdminFilmesPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </BrowserRouter>
+
+    </>
+  )
+}
