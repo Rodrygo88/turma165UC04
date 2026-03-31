@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/Rodrygo88/turma165UC04#readme",
   "dependencies": {
+    "@expo/metro-runtime": "^55.0.7",
     "pg": "^8.19.0",
-    "prompt-sync": "^4.2.0"
+    "prompt-sync": "^4.2.0",
+    "react-dom": "^19.1.0",
+    "react-native-web": "^0.21.0"
   }
 }
